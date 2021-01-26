@@ -63,7 +63,6 @@ export class OrderGateway {
     payOrder(client: any, payload: string): boolean {
         const order = this.orders.find(o => o.orderId === payload);
         order.paid = true;
-        client.to(Staff.WAITERS).emit('paid', payload);
         this.orderStatus(client, order);
         return true;
     }
